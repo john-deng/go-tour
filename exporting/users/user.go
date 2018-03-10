@@ -1,5 +1,11 @@
 package users
 
+import "fmt"
+
+func init()  {
+	fmt.Println("user.init()")
+}
+
 // User struct
 type User struct {
 	Name  string

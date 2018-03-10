@@ -1,4 +1,4 @@
-package main
+package exporting
 
 import (
 	"fmt"
@@ -6,6 +6,10 @@ import (
 	"github.com/john-deng/go-tour/exporting/counters"
 	"github.com/john-deng/go-tour/exporting/users"
 )
+
+func init()  {
+	fmt.Println("main.init()")
+}
 
 func changeUser(u users.IUser) {
 	u.ChangeName("Mike")
@@ -18,8 +22,8 @@ func buildUser() users.User {
 	return user
 }
 
-func main() {
-	fmt.Println("exporting ...")
+func Run() {
+	fmt.Println(">>> Test exporting ...")
 
 	counter := counters.AlertCounter(10)
 	newCounter := counters.New(20)

@@ -5,6 +5,9 @@ import (
 	"math"
 	"os"
 	"runtime"
+	"github.com/john-deng/go-tour/reflection"
+	"github.com/john-deng/go-tour/exporting"
+	"github.com/john-deng/go-tour/concurrency"
 )
 /*****************************************************************************/
 // Pi const
@@ -16,7 +19,7 @@ type Vertex struct {
 	Y int
 }
 /*****************************************************************************/
-func showConst() {
+func testConst() {
 	fmt.Println(Pi)
 }
 /*****************************************************************************/
@@ -25,7 +28,7 @@ func foo() {
 	fmt.Println("\nHello, foo", count)
 }
 /*****************************************************************************/
-func zeroValueVars() {
+func testZeroValueVars() {
 	var a int
 	var b string
 	var c float64
@@ -39,7 +42,7 @@ func zeroValueVars() {
 /*****************************************************************************/
 // When declaring a variable without specifying an explicit type (either by using the := syntax or var = expression syntax), the variable's type is inferred from the value on the right hand side.
 
-func shortVars() {
+func testShortVars() {
 	aa := 10
 	bb := "hello"
 	cc := 3.14159
@@ -63,7 +66,7 @@ func Greeting() {
 	fmt.Printf("Home: %s\n", os.Getenv("HOME"))
 }
 /*****************************************************************************/
-func convertType() {
+func testConvertType() {
 	var x, y int = 3, 4
 	var f float64 = math.Sqrt(float64(x*x + y*y))
 	fmt.Printf("f: %f\n", f)
@@ -71,7 +74,7 @@ func convertType() {
 	fmt.Println(x, y, z)
 }
 /*****************************************************************************/
-func forLoop() {
+func testForLoop() {
 	sum := 0
 	for i := 0; i < 10; i++ {
 		sum += i
@@ -79,7 +82,7 @@ func forLoop() {
 	fmt.Println(sum)
 }
 /*****************************************************************************/
-func forContinued() {
+func testForContinued() {
 	sum := 1
 	for sum < 1000 {
 		sum += sum
@@ -87,7 +90,7 @@ func forContinued() {
 	fmt.Println(sum)
 }
 /*****************************************************************************/
-func forWhile() {
+func testForWhile() {
 	sum := 1
 	for sum < 1000 {
 		sum += sum
@@ -95,7 +98,7 @@ func forWhile() {
 	fmt.Println(sum)
 }
 /*****************************************************************************/
-func switchCase() {
+func testSwitchCase() {
 	fmt.Print("Go runs on ")
 	switch os := runtime.GOOS; os {
 	case "darwin":
@@ -109,7 +112,7 @@ func switchCase() {
 	}
 }
 /*****************************************************************************/
-func deferStatement() {
+func testDeferStatement() {
 	fmt.Println("defer statement: ")
 
 	defer fmt.Println("world")
@@ -117,7 +120,7 @@ func deferStatement() {
 	fmt.Print("hello ")
 }
 /*****************************************************************************/
-func stackingDefers() {
+func testStackingDefers() {
 	fmt.Println("Stacking defers: ")
 
 	fmt.Println("counting")
@@ -147,7 +150,7 @@ func split(sum int) (x, y int) {
 	return
 }
 /*****************************************************************************/
-func pointers() {
+func testPointers() {
 	fmt.Println("Pointers: ")
 
 	i, j := 12, 36
@@ -163,7 +166,7 @@ func pointers() {
 
 }
 /*****************************************************************************/
-func arrays() {
+func testArrays() {
 	var a [2]string
 	a[0] = "Hello"
 	a[1] = "World"
@@ -174,7 +177,7 @@ func arrays() {
 	fmt.Println(primes)
 }
 /*****************************************************************************/
-func slices() {
+func testSlices() {
 	primes := [6]int{2, 4, 6, 8, 10, 12}
 
 	var s []int = primes[1:4]
@@ -186,7 +189,7 @@ func slices() {
 	fmt.Println(primes)
 }
 /*****************************************************************************/
-func slicesReference() {
+func testSlicesReference() {
 	names := [4]string{
 		"John",
 		"Paul",
@@ -204,14 +207,14 @@ func slicesReference() {
 	fmt.Println(names)
 }
 /*****************************************************************************/
-func ranges() {
+func testRanges() {
 	var pow = []int{1, 2, 4, 8, 16, 32, 64, 128}
 	for i, v := range pow {
 		fmt.Printf("2**%d = %d\n", i, v)
 	}
 }
 /*****************************************************************************/
-func rangeContinued() {
+func testRangeContinued() {
 	pow := make([]int, 10)
 	for i := range pow {
 		pow[i] = 1 << uint(i) // == 2**i
@@ -226,7 +229,7 @@ func printSlice(s string, x []int) {
 		s, len(x), cap(x), x)
 }
 /*****************************************************************************/
-func createSliceWithMake() {
+func testSliceWithMake() {
 	a := make([]int, 5)
 	printSlice("a", a)
 
@@ -277,7 +280,7 @@ func testMapLiteralsContinued() {
 	fmt.Println(m)
 }
 /*****************************************************************************/
-func mutatingMaps() {
+func testMutatingMaps() {
 	m := make(map[string]int)
 
 	m["Answer"] = 42
@@ -334,6 +337,7 @@ func (u *user) changeEmail(email string) {
 }
 
 func testInterface() {
+	fmt.Println(">>> Test interface")
 	// Values of type user can be used to call methods
 	// declared with a value receiver.
 	john := user{"John", "john@email.com"}
@@ -367,7 +371,16 @@ func testInterface() {
 	}
 }
 /*****************************************************************************/
+func testMultiMap()  {
 
+	fmt.Println(">>> Test multimap")
+
+	m := map[string][]int{}
+	m["x"] = append(m["x"], 17)
+	m["x"] = append(m["x"], 42)
+	m["y"] = append(m["y"], -1)
+	fmt.Println(m)
+}
 
 
 
@@ -385,44 +398,44 @@ func main() {
 
 	fmt.Println(split(17))
 
-	zeroValueVars()
+	testZeroValueVars()
 
-	shortVars()
+	testShortVars()
 
 	foo()
 
-	convertType()
+	testConvertType()
 
-	forLoop()
+	testForLoop()
 
-	forContinued()
+	testForContinued()
 
-	forWhile()
+	testForWhile()
 
-	switchCase()
+	testSwitchCase()
 
-	deferStatement()
+	testDeferStatement()
 
-	stackingDefers()
+	testStackingDefers()
 
 	a, b := swap("hello", "world")
 	fmt.Println(a, b)
 
-	showConst()
+	testConst()
 
-	pointers()
+	testPointers()
 
-	arrays()
+	testArrays()
 
-	slices()
+	testSlices()
 
-	slicesReference()
+	testSlicesReference()
 
-	ranges()
+	testRanges()
 
-	createSliceWithMake()
+	testSliceWithMake()
 
-	rangeContinued()
+	testRangeContinued()
 
 	testMap()
 
@@ -430,10 +443,19 @@ func main() {
 
 	testMapLiteralsContinued()
 
-	mutatingMaps()
+	testMutatingMaps()
 
 	testFunctionClosures()
 
 	testInterface()
+
+	testMultiMap()
+
+	exporting.Run()
+
+	reflection.Run()
+
+	concurrency.Run()
+
 }
 /*****************************************************************************/
