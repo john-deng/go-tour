@@ -103,6 +103,7 @@ func TestGoRoutineWithMultiChannel()  {
 			select {
 			case v, ok := <-c1:
 				if !ok {
+					fmt.Println("c1")
 					o <- true
 					break
 				}
@@ -110,6 +111,7 @@ func TestGoRoutineWithMultiChannel()  {
 
 			case v, ok := <-c2:
 				if !ok {
+					fmt.Println("c2")
 					o <- true
 					break
 				}
@@ -124,9 +126,11 @@ func TestGoRoutineWithMultiChannel()  {
 	c2 <- "golang"
 
 	close(c1)
-	close(c2)
+	close(c2) // can be removed
 
-	<- o
+	for i := 0; i < 2; i++ {
+		<- o
+	}
 }
 
 func Run()  {
