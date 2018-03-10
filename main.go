@@ -8,6 +8,7 @@ import (
 	"github.com/john-deng/go-tour/reflection"
 	"github.com/john-deng/go-tour/exporting"
 	"github.com/john-deng/go-tour/concurrency"
+	"github.com/john-deng/go-tour/slice"
 )
 /*****************************************************************************/
 // Pi const
@@ -456,6 +457,8 @@ func main() {
 	reflection.Run()
 
 	concurrency.Run()
+
+	slice.Run()
 
 }
 /*****************************************************************************/

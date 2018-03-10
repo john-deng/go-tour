@@ -133,6 +133,28 @@ func TestGoRoutineWithMultiChannel()  {
 	}
 }
 
+
+var c chan string
+
+func Pingpong()  {
+	i := 0
+	for ; ; i++ {
+		fmt.Println(<- c)
+		c <- fmt.Sprintf("From Pingpong: Hi, #%d", i)
+	}
+}
+
+func TestMessagingBetweenGoRoutine()  {
+	fmt.Println(">>> Test messaging between go routine")
+
+	c = make(chan string)
+	go Pingpong()
+	for i := 0; i < 10; i++ {
+		c <- fmt.Sprintf("From TestMessagingBetweenGoRoutine: Hello, #%d", i)
+		fmt.Println(<- c)
+	}
+}
+
 func Run()  {
 	TestSimpleGoRoutine()
 
@@ -143,4 +165,6 @@ func Run()  {
 	TestSimpleGoRoutineWithWaitGroup(20)
 
 	TestGoRoutineWithMultiChannel()
+
+	TestMessagingBetweenGoRoutine()
 }
