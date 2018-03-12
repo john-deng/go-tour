@@ -9,6 +9,7 @@ import (
 	"github.com/john-deng/go-tour/exporting"
 	"github.com/john-deng/go-tour/concurrency"
 	"github.com/john-deng/go-tour/slice"
+	"github.com/john-deng/go-tour/tags"
 )
 /*****************************************************************************/
 // Pi const
@@ -459,6 +460,8 @@ func main() {
 	concurrency.Run()
 
 	slice.Run()
+
+	tags.Run()
 
 }
 /*****************************************************************************/

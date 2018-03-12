@@ -136,7 +136,7 @@ func TestGoRoutineWithMultiChannel()  {
 
 var c chan string
 
-func Pingpong()  {
+func PingPong()  {
 	i := 0
 	for ; ; i++ {
 		fmt.Println(<- c)
@@ -148,7 +148,7 @@ func TestMessagingBetweenGoRoutine()  {
 	fmt.Println(">>> Test messaging between go routine")
 
 	c = make(chan string)
-	go Pingpong()
+	go PingPong()
 	for i := 0; i < 10; i++ {
 		c <- fmt.Sprintf("From TestMessagingBetweenGoRoutine: Hello, #%d", i)
 		fmt.Println(<- c)
