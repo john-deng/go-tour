@@ -13,7 +13,7 @@ func TestAdd(t *testing.T)  {
 }
 
 func TestMul(t *testing.T)  {
-	expected := 8
+	expected := 6
 	actual := Mul(2, 3)
 	assert.Equal(t, expected, actual)
 }
