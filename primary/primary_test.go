@@ -18,13 +18,15 @@ type Vertex struct {
 	Y int
 }
 /*****************************************************************************/
-func testConst() {
+func TestConst(t *testing.T) {
 	fmt.Println(Pi)
+	assert.Equal(t, 3.14, Pi)
 }
 /*****************************************************************************/
-func foo() {
+func TestFoo(t *testing.T) {
 	var count = 2017
 	fmt.Println("\nHello, foo", count)
+	assert.Equal(t, 2018 , count)
 }
 /*****************************************************************************/
 func TestZeroValueVars(t *testing.T) {
@@ -44,7 +46,7 @@ func TestZeroValueVars(t *testing.T) {
 /*****************************************************************************/
 // When declaring a variable without specifying an explicit type (either by using the := syntax or var = expression syntax), the variable's type is inferred from the value on the right hand side.
 
-func testShortVars() {
+func TestShortVars(t *testing.T) {
 	aa := 10
 	bb := "hello"
 	cc := 3.14159
@@ -54,26 +56,32 @@ func testShortVars() {
 
 	fmt.Printf("aa: %d [%v]\n", aa, aa)
 	fmt.Printf("bb: %s [%v]\n", bb, bb)
-	fmt.Printf("cc: %f [%v]\n", cc, cc)
+	fmt.Printf("cc: %v [%v]\n", cc, cc)
 	fmt.Printf("dd: %v [%v]\n", dd, dd)
 
 	fmt.Printf("aaa: %d [%v]\n", aaa, aaa)
+	assert.Equal(t, 10,aa)
 }
 /*****************************************************************************/
 // Greeting funciton
 // export Greeting
-func Greeting() {
+func TestGreeting(t *testing.T) {
 	fmt.Println("Hello, world")
 	fmt.Println("Hello, go")
 	fmt.Printf("Home: %s\n", os.Getenv("HOME"))
 }
 /*****************************************************************************/
-func testConvertType() {
+func TestConvertType(t *testing.T) {
 	var x, y int = 3, 4
+	dd := float64(5)
+	fmt.Printf("x: %x\n", x)
 	var f float64 = math.Sqrt(float64(x*x + y*y))
 	fmt.Printf("f: %f\n", f)
 	var z uint = uint(f)
 	fmt.Println(x, y, z)
+	assert.Equal(t, 3, x)
+	assert.Equal(t, 4 ,y)
+	assert.Equal(t, dd , f)
 }
 /*****************************************************************************/
 func testForLoop() {
