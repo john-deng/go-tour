@@ -3,9 +3,9 @@ package primary
 import "testing"
 
 func TestCreatedMap(t *testing.T)  {
-	createdMap()
+	createdMap(t)
 }
 
 func TestForMap(t *testing.T)  {
-	forMap()
+	forMap(t)
 }

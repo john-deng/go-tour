@@ -26,7 +26,7 @@ func TestConst(t *testing.T) {
 func TestFoo(t *testing.T) {
 	var count = 2017
 	fmt.Println("\nHello, foo", count)
-	assert.Equal(t, 2018 , count)
+	assert.Equal(t, 2017 , count)
 }
 /*****************************************************************************/
 func TestZeroValueVars(t *testing.T) {
@@ -42,6 +42,8 @@ func TestZeroValueVars(t *testing.T) {
 
 	assert.Equal(t, 0, a)
 	assert.Equal(t, "", b)
+	assert.Equal(t, float64(0), c)
+	assert.Equal(t,false,d)
 }
 /*****************************************************************************/
 // When declaring a variable without specifying an explicit type (either by using the := syntax or var = expression syntax), the variable's type is inferred from the value on the right hand side.
@@ -61,6 +63,9 @@ func TestShortVars(t *testing.T) {
 
 	fmt.Printf("aaa: %d [%v]\n", aaa, aaa)
 	assert.Equal(t, 10,aa)
+	assert.Equal(t, "hello", bb)
+	assert.Equal(t, 3.14159, cc)
+	assert.Equal(t, true , dd)
 }
 /*****************************************************************************/
 // Greeting funciton
@@ -91,6 +96,7 @@ func TestForLoop(t *testing.T) {
 		fmt.Printf("sum: %sum\n",sum)
 	}
 	fmt.Println(sum)
+	assert.Equal(t, 45 , sum)
 }
 /*****************************************************************************/
 func TestForContinued(t *testing.T) {
@@ -108,7 +114,7 @@ func TestForWhile(t *testing.T) {
 		sum += sum
 	}
 	fmt.Println(sum)
-	assert.Equal(t,156,sum)
+	assert.Equal(t,1024,sum)
 }
 /*****************************************************************************/
 func TestSwitchCase(t *testing.T) {
@@ -191,6 +197,7 @@ func TestArrays(t *testing.T) {
 
 	primes := [6]int{1, 3, 5, 7, 9, 11}
 	fmt.Println(primes)
+	assert.Equal(t,[6]int{1, 3, 5, 7, 9, 11}, primes)
 }
 /*****************************************************************************/
 func TestSlices(t *testing.T) {
@@ -221,6 +228,12 @@ func TestSlicesReference(t *testing.T) {
 	b[0] = "XXX"
 	fmt.Println(a, b)
 	fmt.Println(names)
+	assert.Equal(t, [4]string{
+		"John",
+		"XXX",
+		"George",
+		"Ringo",
+	}, names)
 }
 /*****************************************************************************/
 func TestRanges(t *testing.T) {
@@ -228,6 +241,7 @@ func TestRanges(t *testing.T) {
 	for i, v := range pow {
 		fmt.Printf("2**%d = %d\n", i, v)
 	}
+	assert.Equal(t, []int{1, 2, 4, 8, 16, 32, 64, 128},pow)
 }
 /*****************************************************************************/
 func TestRangeContinued(t *testing.T) {
@@ -238,6 +252,7 @@ func TestRangeContinued(t *testing.T) {
 	for _, value := range pow {
 		fmt.Printf("%d\n", value)
 	}
+	assert.Equal(t, []int{1, 2, 4, 8, 16, 32, 64, 128, 256, 512}, pow)
 }
 /*****************************************************************************/
 func printSlice(s string, x []int) {
@@ -248,15 +263,18 @@ func printSlice(s string, x []int) {
 func TestSliceWithMake(t *testing.T) {
 	a := make([]int, 5)
 	printSlice("a", a)
-
+	assert.Equal(t, []int{0,0,0,0,0},a)
 	b := make([]int, 0, 5)
 	printSlice("b", b)
-
+	assert.Equal(t, []int{},b)
 	c := b[:2]
 	printSlice("c", c)
-
+	assert.Equal(t, []int{0,0},c)
 	d := c[2:5]
 	printSlice("d", d)
+	assert.Equal(t, []int{0,0,0},d)
+
+
 }
 /*****************************************************************************/
 // Coord struct
@@ -272,6 +290,9 @@ func TestMap(t *testing.T) {
 		40.68433, -74.39967,
 	}
 	fmt.Println(m["Bell Labs"])
+	assert.Equal(t, map[string]Coord{"Bell Labs":Coord{
+		40.68433, -74.39967,
+	}},m)
 }
 /*****************************************************************************/
 func TestMapLiterals(t *testing.T) {

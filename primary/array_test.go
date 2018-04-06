@@ -4,42 +4,42 @@ import "testing"
 
 /*********************************************************************************************************************/
 func TestStatement(t *testing.T)  {
-	statement()
+	statement(t)
 }
 
 /*********************************************************************************************************************/
 func TestInitialize(t *testing.T)  {
 
-	initialize()
+	initialize(t)
 }
 
 
 /*********************************************************************************************************************/
 func TestIndexArray(t *testing.T) {
-	IndexArray()
+	IndexArray(t)
 }
 
 /*********************************************************************************************************************/
 
 func TestUpdateArray(t *testing.T) {
-	updateArray()
+	updateArray(t)
 }
 
 /*********************************************************************************************************************/
 func TestForArray(t *testing.T)  {
-	forArray()
+	forArray(t)
 }
 
 /*********************************************************************************************************************/
 func TestAssignmentArray(t *testing.T)  {
-	assignmentArray()
+	assignmentArray(t)
 }
 /*********************************************************************************************************************/
 func TestPointer(t *testing.T)  {
-	transmitArray()
+	transmitArray(t)
 }
 
 func TestPointerTransmitArray(t *testing.T)  {
-	pointerTransmitArray()
+	pointerTransmitArray(t)
 }
 
