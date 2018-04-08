@@ -172,7 +172,7 @@ func split(sum int) (x, y int) {
 	return
 }
 /*****************************************************************************/
-func testPointers() {
+func testPointers(t *testing.T) {
 	fmt.Println("Pointers: ")
 
 	i, j := 12, 36

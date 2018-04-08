@@ -1,0 +1,4 @@
+Error:2018/04/08 11:06:44 json_test.go:42: 错误
+Error:2018/04/08 11:07:19 json_test.go:42: 错误
+Error:2018/04/08 11:19:03 http_test.go:29: 返回信息为:{} &{GET /sendjson HTTP/1.1 1 1 map[] <nil> <nil> 0 [] false  map[] map[] <nil> map[]   <nil> <nil> <nil> <nil>}
+Error:2018/04/08 11:20:03 http_test.go:29: 返回信息为:{} &{GET /sendjson HTTP/1.1 1 1 map[] <nil> <nil> 0 [] false  map[] map[] <nil> map[]   <nil> <nil> <nil> <nil>}
