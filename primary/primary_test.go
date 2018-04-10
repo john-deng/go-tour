@@ -18,13 +18,15 @@ type Vertex struct {
 	Y int
 }
 /*****************************************************************************/
-func testConst() {
+func TestConst(t *testing.T) {
 	fmt.Println(Pi)
+	assert.Equal(t, 3.14, Pi)
 }
 /*****************************************************************************/
-func foo() {
+func TestFoo(t *testing.T) {
 	var count = 2017
 	fmt.Println("\nHello, foo", count)
+	assert.Equal(t, 2017 , count)
 }
 /*****************************************************************************/
 func TestZeroValueVars(t *testing.T) {
@@ -40,11 +42,13 @@ func TestZeroValueVars(t *testing.T) {
 
 	assert.Equal(t, 0, a)
 	assert.Equal(t, "", b)
+	assert.Equal(t, float64(0), c)
+	assert.Equal(t,false,d)
 }
 /*****************************************************************************/
 // When declaring a variable without specifying an explicit type (either by using the := syntax or var = expression syntax), the variable's type is inferred from the value on the right hand side.
 
-func testShortVars() {
+func TestShortVars(t *testing.T) {
 	aa := 10
 	bb := "hello"
 	cc := 3.14159
@@ -54,55 +58,69 @@ func testShortVars() {
 
 	fmt.Printf("aa: %d [%v]\n", aa, aa)
 	fmt.Printf("bb: %s [%v]\n", bb, bb)
-	fmt.Printf("cc: %f [%v]\n", cc, cc)
+	fmt.Printf("cc: %v [%v]\n", cc, cc)
 	fmt.Printf("dd: %v [%v]\n", dd, dd)
 
 	fmt.Printf("aaa: %d [%v]\n", aaa, aaa)
+	assert.Equal(t, 10,aa)
+	assert.Equal(t, "hello", bb)
+	assert.Equal(t, 3.14159, cc)
+	assert.Equal(t, true , dd)
 }
 /*****************************************************************************/
 // Greeting funciton
 // export Greeting
-func Greeting() {
+func TestGreeting(t *testing.T) {
 	fmt.Println("Hello, world")
 	fmt.Println("Hello, go")
 	fmt.Printf("Home: %s\n", os.Getenv("HOME"))
 }
 /*****************************************************************************/
-func testConvertType() {
+func TestConvertType(t *testing.T) {
 	var x, y int = 3, 4
+	dd := float64(5)
+	fmt.Printf("x: %x\n", x)
 	var f float64 = math.Sqrt(float64(x*x + y*y))
 	fmt.Printf("f: %f\n", f)
 	var z uint = uint(f)
 	fmt.Println(x, y, z)
+	assert.Equal(t, 3, x)
+	assert.Equal(t, 4 ,y)
+	assert.Equal(t, dd , f)
 }
 /*****************************************************************************/
-func testForLoop() {
+func TestForLoop(t *testing.T) {
 	sum := 0
 	for i := 0; i < 10; i++ {
 		sum += i
+		fmt.Printf("sum: %sum\n",sum)
 	}
 	fmt.Println(sum)
+	assert.Equal(t, 45 , sum)
 }
 /*****************************************************************************/
-func testForContinued() {
+func TestForContinued(t *testing.T) {
 	sum := 1
 	for sum < 1000 {
 		sum += sum
 	}
 	fmt.Println(sum)
+	assert.Equal(t, 1024 , sum)
 }
 /*****************************************************************************/
-func testForWhile() {
+func TestForWhile(t *testing.T) {
 	sum := 1
 	for sum < 1000 {
 		sum += sum
 	}
 	fmt.Println(sum)
+	assert.Equal(t,1024,sum)
 }
 /*****************************************************************************/
-func testSwitchCase() {
+func TestSwitchCase(t *testing.T) {
 	fmt.Print("Go runs on ")
-	switch os := runtime.GOOS; os {
+	switch os := runtime.GOOS;
+	os {
 	case "darwin":
 		fmt.Println("OS X.")
 	case "linux":
@@ -111,10 +129,11 @@ func testSwitchCase() {
 		// freebsd, openbsd,
 		// plan9, windows...
 		fmt.Printf("%s.", os)
+
 	}
 }
 /*****************************************************************************/
-func testDeferStatement() {
+func TestDeferStatement(t *testing.T) {
 	fmt.Println("defer statement: ")
 
 	defer fmt.Println("world")
@@ -122,19 +141,20 @@ func testDeferStatement() {
 	fmt.Print("hello ")
 }
 /*****************************************************************************/
-func testStackingDefers() {
+func TestStackingDefers(t *testing.T) {
 	fmt.Println("Stacking defers: ")
 
 	fmt.Println("counting")
-
+	i := 0
 	for i := 0; i < 10; i++ {
 		defer fmt.Println(i)
 	}
 
 	fmt.Println("done")
+	assert.Equal(t, 0, i)
 }
 /*****************************************************************************/
-func add(x int, y int) int {
+func add( x int, y int) int {
 	return x + y
 }
 /*****************************************************************************/
@@ -152,7 +172,7 @@ func split(sum int) (x, y int) {
 	return
 }
 /*****************************************************************************/
-func testPointers() {
+func testPointers(t *testing.T) {
 	fmt.Println("Pointers: ")
 
 	i, j := 12, 36
@@ -168,7 +188,7 @@ func testPointers() {
 
 }
 /*****************************************************************************/
-func testArrays() {
+func TestArrays(t *testing.T) {
 	var a [2]string
 	a[0] = "Hello"
 	a[1] = "World"
@@ -177,9 +197,10 @@ func testArrays() {
 
 	primes := [6]int{1, 3, 5, 7, 9, 11}
 	fmt.Println(primes)
+	assert.Equal(t,[6]int{1, 3, 5, 7, 9, 11}, primes)
 }
 /*****************************************************************************/
-func testSlices() {
+func TestSlices(t *testing.T) {
 	primes := [6]int{2, 4, 6, 8, 10, 12}
 
 	var s []int = primes[1:4]
@@ -191,7 +212,7 @@ func testSlices() {
 	fmt.Println(primes)
 }
 /*****************************************************************************/
-func testSlicesReference() {
+func TestSlicesReference(t *testing.T) {
 	names := [4]string{
 		"John",
 		"Paul",
@@ -207,16 +228,23 @@ func testSlicesReference() {
 	b[0] = "XXX"
 	fmt.Println(a, b)
 	fmt.Println(names)
+	assert.Equal(t, [4]string{
+		"John",
+		"XXX",
+		"George",
+		"Ringo",
+	}, names)
 }
 /*****************************************************************************/
-func testRanges() {
+func TestRanges(t *testing.T) {
 	var pow = []int{1, 2, 4, 8, 16, 32, 64, 128}
 	for i, v := range pow {
 		fmt.Printf("2**%d = %d\n", i, v)
 	}
+	assert.Equal(t, []int{1, 2, 4, 8, 16, 32, 64, 128},pow)
 }
 /*****************************************************************************/
-func testRangeContinued() {
+func TestRangeContinued(t *testing.T) {
 	pow := make([]int, 10)
 	for i := range pow {
 		pow[i] = 1 << uint(i) // == 2**i
@@ -224,6 +252,7 @@ func testRangeContinued() {
 	for _, value := range pow {
 		fmt.Printf("%d\n", value)
 	}
+	assert.Equal(t, []int{1, 2, 4, 8, 16, 32, 64, 128, 256, 512}, pow)
 }
 /*****************************************************************************/
 func printSlice(s string, x []int) {
@@ -231,18 +260,21 @@ func printSlice(s string, x []int) {
 		s, len(x), cap(x), x)
 }
 /*****************************************************************************/
-func testSliceWithMake() {
+func TestSliceWithMake(t *testing.T) {
 	a := make([]int, 5)
 	printSlice("a", a)
-
+	assert.Equal(t, []int{0,0,0,0,0},a)
 	b := make([]int, 0, 5)
 	printSlice("b", b)
-
+	assert.Equal(t, []int{},b)
 	c := b[:2]
 	printSlice("c", c)
-
+	assert.Equal(t, []int{0,0},c)
 	d := c[2:5]
 	printSlice("d", d)
+	assert.Equal(t, []int{0,0,0},d)
+
+
 }
 /*****************************************************************************/
 // Coord struct
@@ -252,15 +284,18 @@ type Coord struct {
 /*****************************************************************************/
 var m map[string]Coord
 
-func testMap() {
+func TestMap(t *testing.T) {
 	m = make(map[string]Coord)
 	m["Bell Labs"] = Coord{
 		40.68433, -74.39967,
 	}
 	fmt.Println(m["Bell Labs"])
+	assert.Equal(t, map[string]Coord{"Bell Labs":Coord{
+		40.68433, -74.39967,
+	}},m)
 }
 /*****************************************************************************/
-func testMapLiterals() {
+func TestMapLiterals(t *testing.T) {
 	var m = map[string]Coord{
 		"Bell Labs": Coord{
 			40.68433, -74.39967,
@@ -273,7 +308,7 @@ func testMapLiterals() {
 	fmt.Println(m)
 }
 /*****************************************************************************/
-func testMapLiteralsContinued() {
+func TestMapLiteralsContinued(t *testing.T) {
 	var m = map[string]Coord{
 		"Bell Labs": {40.68433, -74.39967},
 		"Google":    {37.42202, -122.08408},
@@ -282,7 +317,7 @@ func testMapLiteralsContinued() {
 	fmt.Println(m)
 }
 /*****************************************************************************/
-func testMutatingMaps() {
+func TestMutatingMaps(t *testing.T) {
 	m := make(map[string]int)
 
 	m["Answer"] = 42
@@ -306,7 +341,7 @@ func adder() func(int) int {
 	}
 }
 
-func testFunctionClosures() {
+func TestFunctionClosures(t *testing.T) {
 	fmt.Println("Function closures: ")
 
 	pos, neg := adder(), adder()
@@ -338,7 +373,7 @@ func (u *user) changeEmail(email string) {
 	u.email = email
 }
 
-func testInterface() {
+func TestInterface(t *testing.T) {
 	fmt.Println(">>> Test interface")
 	// Values of type user can be used to call methods
 	// declared with a value receiver.
@@ -373,7 +408,7 @@ func testInterface() {
 	}
 }
 /*****************************************************************************/
-func testMultiMap()  {
+func TestMultiMap(t *testing.T)  {
 
 	fmt.Println(">>> Test multimap")
 
