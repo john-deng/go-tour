@@ -14,18 +14,24 @@ func main() {
 		return nil
 	}
 
-	prompt := promptui.Prompt{
+	username := promptui.Prompt{
+		Label:    "Username",
+	}
+	u, err := username.Run()
+
+	password := promptui.Prompt{
 		Label:    "Password",
 		Validate: validate,
 		Mask:     '*',
 	}
 
-	result, err := prompt.Run()
+	p, err := password.Run()
 
 	if err != nil {
 		fmt.Printf("Prompt failed %v\n", err)
 		return
 	}
 
-	fmt.Printf("Your password is %q\n", result)
+	fmt.Printf("Your username is %q\n", u)
+	fmt.Printf("Your password is %q\n", p)
 }
